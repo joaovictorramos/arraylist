@@ -3,14 +3,15 @@ package com.mycompany.caonino2;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Adocao {
     private Cachorro dog;
     private Pessoa pes;
     private String dataAdocao;
 
-    private static double maior = 0;
-    private static double calcMaisTempo;
+    private static long maior = 0;
+    private static long calcMaisTempo;
     private static String nomeMaisTempo = "";
 
     private boolean chave = true;
@@ -60,13 +61,7 @@ public class Adocao {
     
     public String maisTempo(){
         LocalDate hoje = LocalDate.now();
-        Period periodo = Period.between(dataAdo,hoje);
-        
-        int dia = periodo.getDays();
-        int mes = periodo.getMonths();
-        int ano = periodo.getYears();
-        
-        calcMaisTempo = ((ano * 365) + (mes * 30) + dia);
+        calcMaisTempo = ChronoUnit.DAYS.between(dataAdo, hoje);
         
         if(maior < calcMaisTempo){
             maior = calcMaisTempo;
